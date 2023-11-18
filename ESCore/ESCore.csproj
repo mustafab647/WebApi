@@ -1,10 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ESContext\CategoryContext.cs" />
+    <Compile Remove="ESContext\CategoryProductMapContext.cs" />
+    <Compile Remove="ESContext\CurrencyContext.cs" />
+    <Compile Remove="ESContext\ProductContext.cs" />
+    <Compile Remove="ESContext\ProductSpecificationMapContext.cs" />
+    <Compile Remove="ESContext\ProductVariantContext.cs" />
+    <Compile Remove="ESContext\SpecificationContext.cs" />
+    <Compile Remove="ESContext\VariantTypeContext.cs" />
+    <Compile Remove="ESContext\VariantTypeValueContext.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
@@ -19,12 +31,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ESCore\ESCore.csproj" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
