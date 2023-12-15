@@ -2,11 +2,13 @@
 using ESCore.Model.Product;
 using ESCore.ESContext;
 using WebApi.Attribute;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly ESDBContext _context;
@@ -17,6 +19,7 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [ErrorHandlingFilter]
+        [Authorize]
         public List<Product> GetProduct()
         {
             List<Product> result = _context.Products.ToList();

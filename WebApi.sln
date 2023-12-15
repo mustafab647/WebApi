@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{D0591D3F-D94B-486F-A0D9-ABA1A225CB14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{D0591D3F-D94B-486F-A0D9-ABA1A225CB14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESCore", "ESCore\ESCore.csproj", "{68277D17-04C9-4B8D-9CF2-DB56234F93E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ESCore", "ESCore\ESCore.csproj", "{68277D17-04C9-4B8D-9CF2-DB56234F93E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESService", "ESService\ESService.csproj", "{7E98F10C-62DE-4F19-8020-49BC74B41B09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{68277D17-04C9-4B8D-9CF2-DB56234F93E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68277D17-04C9-4B8D-9CF2-DB56234F93E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68277D17-04C9-4B8D-9CF2-DB56234F93E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E98F10C-62DE-4F19-8020-49BC74B41B09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E98F10C-62DE-4F19-8020-49BC74B41B09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E98F10C-62DE-4F19-8020-49BC74B41B09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E98F10C-62DE-4F19-8020-49BC74B41B09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

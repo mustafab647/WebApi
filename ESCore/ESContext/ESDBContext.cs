@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using ESCore.Model.Product;
 using ESCore.Model;
+using ESCore.Model.Authentication;
 //using System.Data.Entity;
 
 namespace ESCore.ESContext
@@ -27,6 +28,7 @@ namespace ESCore.ESContext
         public DbSet<Specification> Specifications { get; set; }
         public DbSet<VariantType> VariantTypes { get; set; }
         public DbSet<VariantTypeValue> VariantTypeValues { get; set; }
+        public DbSet<User> Users { get; set; }
 
         //public ESDBContext(string connectionString) : base(connectionString) { }
         public ESDBContext(DbContextOptions<ESDBContext> dbContextOptions) : base(dbContextOptions)
@@ -57,6 +59,7 @@ namespace ESCore.ESContext
             modelBuilder.Entity<VariantTypeValue>().ToTable(nameof(VariantTypeValue));
             modelBuilder.Entity<ProductImage>().ToTable(nameof(ProductImage));
             modelBuilder.Entity<ProductVariantMap>().ToTable(nameof(ProductVariantMap));
+            modelBuilder.Entity<User>().ToTable("ApiUser");
             base.OnModelCreating(modelBuilder);
         }
 

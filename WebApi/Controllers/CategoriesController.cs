@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ESCore.Model.Product;
 using WebApi.Models;
 using WebApi.Attribute;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers
 {
@@ -25,6 +26,7 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [ErrorHandlingFilter]
+        [Authorize]
         public void Create(Models.CategoryModels.CategoryModel category)
         {
             if (_context.Categories.Any(x => x.Name == category.Name))
