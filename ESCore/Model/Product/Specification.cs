@@ -15,6 +15,6 @@ namespace ESCore.Model.Product
         [DataType(DataType.Text)]
         public string Value { get; set; }
 
-        public ICollection<ProductSpecificationMap> SpecificationMap { get; set; }
+        public virtual ICollection<ProductSpecificationMap> SpecificationMap { get; set; }
     }
 }

@@ -34,15 +34,24 @@ namespace WebApi.Controllers
             PrepareData.ProductPrepare productPrepare = new PrepareData.ProductPrepare(_context);
             foreach (Models.ProductModels.ProductModel product in products)
             {
+                Models.Result resultPair = new Models.Result();
+                resultPair.Success = true;
+                resultPair.Headers = new Dictionary<string, string>();
+                resultPair.Headers.Add("ProductCode", product.Code);
                 try
                 {
                     var r = productPrepare.PrepareProduct(product);
                     _context.Products.Add(r);
-
+                    resultPair.Success = true;
                 }
                 catch (Exception ex)
                 {
-
+                    resultPair.Success = false;
+                    resultPair.Error = ex.Message;
+                }
+                finally
+                {
+                    result.Add(resultPair);
                 }
 
             }

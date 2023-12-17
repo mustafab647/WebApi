@@ -25,6 +25,7 @@ namespace ESCore.ESContext
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ProductSpecificationMap> ProductSpecificationMaps { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
+        public DbSet<SpecificationType> SpecificationTypes { get; set; }
         public DbSet<Specification> Specifications { get; set; }
         public DbSet<VariantType> VariantTypes { get; set; }
         public DbSet<VariantTypeValue> VariantTypeValues { get; set; }
@@ -54,6 +55,7 @@ namespace ESCore.ESContext
             modelBuilder.Entity<Product>().ToTable(nameof(Product)).HasMany(x => x.Categories);
             modelBuilder.Entity<ProductSpecificationMap>().ToTable(nameof(ProductSpecificationMap));
             modelBuilder.Entity<ProductVariant>().ToTable(nameof(ProductVariant));
+            modelBuilder.Entity<SpecificationType>().ToTable(nameof(SpecificationType));
             modelBuilder.Entity<Specification>().ToTable(nameof(Specification));
             modelBuilder.Entity<VariantType>().ToTable(nameof(VariantType));
             modelBuilder.Entity<VariantTypeValue>().ToTable(nameof(VariantTypeValue));

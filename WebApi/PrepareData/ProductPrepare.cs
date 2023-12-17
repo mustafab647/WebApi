@@ -53,10 +53,12 @@ namespace WebApi.PrepareData
             foreach(var specificationModel in specificationModels)
             {
                 ProductSpecificationMap specificationMap = new ProductSpecificationMap();
-                var spec = _context.Specifications.FirstOrDefault(x => x.Name == specificationModel.Type && x.Value == specificationModel.Value);
-
+                var _spec = _context.Specifications.Where(x => x.Name == specificationModel.Type);
+                var spec = _spec.FirstOrDefault(x=>x.Value == specificationModel.Value);
+                if (_spec == null)
+                    throw new ResultException($"Not found Specification Type {specificationModel.Type}");
                 if (spec == null)
-                    throw new ResultException("Not found Specification");
+                    throw new ResultException($"Not found Specification {specificationModel.Type}:{specificationModel.Value}");
                 specificationMap.SpecificationId = spec.Id;
                 result.Add(specificationMap);
             }
