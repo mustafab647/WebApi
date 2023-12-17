@@ -9,6 +9,7 @@ namespace WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
+    [Authorize(Roles ="Category")]
     public class CategoriesController : ControllerBase
     {
         private readonly ESDBContext _context;
@@ -17,6 +18,7 @@ namespace WebApi.Controllers
             _context = context;
         }
         [HttpGet]
+        [Authorize(Roles = "Category.View")]
         public List<Category> GetCategory()
         {
             List<Category> categories = _context.Categories.ToList();
@@ -26,7 +28,7 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [ErrorHandlingFilter]
-        [Authorize]
+        [Authorize(Roles = "Category.Create")]
         public void Create(Models.CategoryModels.CategoryModel category)
         {
             if (_context.Categories.Any(x => x.Name == category.Name))

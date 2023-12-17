@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ESCore", "ESCore\ESCore.csproj", "{68277D17-04C9-4B8D-9CF2-DB56234F93E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESService", "ESService\ESService.csproj", "{7E98F10C-62DE-4F19-8020-49BC74B41B09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ESService", "ESService\ESService.csproj", "{7E98F10C-62DE-4F19-8020-49BC74B41B09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{CD43BE80-3626-44A6-97C2-495D1FDDF594}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D0591D3F-D94B-486F-A0D9-ABA1A225CB14} = {CD43BE80-3626-44A6-97C2-495D1FDDF594}
+		{68277D17-04C9-4B8D-9CF2-DB56234F93E7} = {CD43BE80-3626-44A6-97C2-495D1FDDF594}
+		{7E98F10C-62DE-4F19-8020-49BC74B41B09} = {CD43BE80-3626-44A6-97C2-495D1FDDF594}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F91A5353-1510-4BB7-8C20-E3A4782DB8AA}

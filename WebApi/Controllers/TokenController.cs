@@ -46,7 +46,9 @@ namespace WebApi.Controllers
             if (await _userManager.CheckPasswordAsync(user, token.Password))
             {
                 var authClaims = new List<Claim>();
-                authClaims.Add(new Claim("Role", "CreateCategory"));
+                authClaims.Add(new Claim(ClaimTypes.Role, "Category"));
+                authClaims.Add(new Claim(ClaimTypes.Role, "Category.Create"));
+                authClaims.Add(new Claim(ClaimTypes.Role, "Category.View"));
                 authClaims.Add(new Claim(ClaimTypes.Name, token.UserName));
                 authClaims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
 
