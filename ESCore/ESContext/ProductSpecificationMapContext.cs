@@ -24,8 +24,8 @@ namespace ESCore.ESContext
         {
             modelBuilder.Entity<ProductSpecificationMap>().ToTable(nameof(ProductSpecificationMap));
             modelBuilder.Entity<ProductSpecificationMap>().HasKey(x => x.Id);
-            modelBuilder.Entity<ProductSpecificationMap>().HasOne(x=>x.Product).WithMany(x=>x.Specifications).HasForeignKey(x=>x.ProductId);
-            modelBuilder.Entity<ProductSpecificationMap>().HasOne(x => x.Specification).WithMany(x=>x.SpecificationMap).HasForeignKey(x=>x.SpecificationId);
+            //modelBuilder.Entity<ProductSpecificationMap>().HasOne(x=>x.Product).WithMany(x=>x.Specifications).HasForeignKey(x=>x.ProductId);
+            //modelBuilder.Entity<ProductSpecificationMap>().HasOne(x => x.Specification).WithMany(x=>x.SpecificationMap).HasForeignKey(x=>x.SpecificationId);
             base.OnModelCreating(modelBuilder);
         }
     }

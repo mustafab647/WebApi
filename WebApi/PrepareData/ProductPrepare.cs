@@ -79,6 +79,8 @@ namespace WebApi.PrepareData
                 if (variantType != null)
                 {
                     VariantTypeValue? variantTypeValue = _context.VariantTypeValues.FirstOrDefault(x => x.VariantTypeId == variantType.Id && x.VariantName == variantValue.VariantValueName);
+                    if (variantTypeValue == null)
+                        throw new ResultException($"Not found variant value: {variantValue.VariantValueName}");
                     productVariantMap.VariantTypeValueId = variantTypeValue?.Id ?? 0;
                     productVariantMap.VariantTypeValue = variantTypeValue;
                 }

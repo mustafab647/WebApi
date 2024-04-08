@@ -10,5 +10,6 @@ namespace ESService.Abstracts
     public interface ITokenService
     {
         Task<GenerateTokenResponse> GenerateTokenAsync(GenerateTokenRequest generateTokenRequest);
+        Task<string> CreateToken(ESCore.Model.Authentication.User user);
     }
 }

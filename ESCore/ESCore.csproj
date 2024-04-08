@@ -10,9 +10,6 @@
     <Compile Remove="ESContext\CategoryContext.cs" />
     <Compile Remove="ESContext\CategoryProductMapContext.cs" />
     <Compile Remove="ESContext\CurrencyContext.cs" />
-    <Compile Remove="ESContext\ProductContext.cs" />
-    <Compile Remove="ESContext\ProductSpecificationMapContext.cs" />
-    <Compile Remove="ESContext\ProductVariantContext.cs" />
     <Compile Remove="ESContext\SpecificationContext.cs" />
     <Compile Remove="ESContext\VariantTypeContext.cs" />
     <Compile Remove="ESContext\VariantTypeValueContext.cs" />

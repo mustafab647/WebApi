@@ -31,6 +31,8 @@ builder.Services.AddDbContextPool<ESDBContext>(options => options.UseSqlServer(m
 //builder.Services.AddSqlServer<ESIdentityDbContext>(mssqlConStr);
 builder.Services.AddSqlServer<ESDBContext>(mssqlConStr);
 builder.Services.AddScoped<ESDBContext>();
+builder.Services.AddScoped<ProductContext>();
+builder.Services.AddScoped<ProductVariantContext>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddIdentity<ESCore.Model.Authentication.User, IdentityRole>()
     .AddEntityFrameworkStores<ESDBContext>()

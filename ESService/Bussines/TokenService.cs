@@ -21,6 +21,24 @@ namespace ESService.Bussines
             _configuration = configuration;
         }
 
+        public async Task<string> CreateToken(ESCore.Model.Authentication.User user)
+        {
+            var authClaims = new List<Claim>();
+            authClaims.Add(new Claim(ClaimTypes.Role, "Category"));
+            authClaims.Add(new Claim(ClaimTypes.Role, "Category.Create"));
+            authClaims.Add(new Claim(ClaimTypes.Role, "Category.View"));
+            authClaims.Add(new Claim(ClaimTypes.Name, user.UserName));
+            authClaims.Add(new Claim(ClaimTypes.Email, user.Email));
+            authClaims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
+
+            GenerateTokenRequest generateTokenRequest = new GenerateTokenRequest();
+            generateTokenRequest.UserName = user.UserName;
+            generateTokenRequest.Claims = authClaims;
+
+            var tokenResp = await GenerateTokenAsync(generateTokenRequest);
+            string result = new JwtSecurityTokenHandler().WriteToken(tokenResp.JwtSecurityToken);
+            return result;
+        }
         public async Task<GenerateTokenResponse> GenerateTokenAsync(GenerateTokenRequest generateTokenRequest)
         {
             JwtSecurityToken token = await GetToken(generateTokenRequest.Claims, generateTokenRequest.UserName);
@@ -35,7 +53,7 @@ namespace ESService.Bussines
             var authSigninKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:SigningKey"] ?? ""));
             string issuer = _configuration["JwtSettings:Issuer"] ?? "";
             string audience = _configuration["JwtSettings:Audience"] ?? "";
-            DateTime expireDate = DateTime.Now.AddHours(1);
+            DateTime expireDate = DateTime.Now.AddMinutes(1);
             SigningCredentials signingCredentials = new SigningCredentials(authSigninKey, SecurityAlgorithms.HmacSha256);
 
 

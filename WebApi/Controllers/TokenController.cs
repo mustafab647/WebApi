@@ -45,23 +45,12 @@ namespace WebApi.Controllers
             var user = await _userManager.FindByNameAsync(token.UserName);
             if (await _userManager.CheckPasswordAsync(user, token.Password))
             {
-                var authClaims = new List<Claim>();
-                authClaims.Add(new Claim(ClaimTypes.Role, "Category"));
-                authClaims.Add(new Claim(ClaimTypes.Role, "Category.Create"));
-                authClaims.Add(new Claim(ClaimTypes.Role, "Category.View"));
-                authClaims.Add(new Claim(ClaimTypes.Name, token.UserName));
-                authClaims.Add(new Claim(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-
-                GenerateTokenRequest generateTokenRequest = new GenerateTokenRequest();
-                generateTokenRequest.UserName = token.UserName;
-                generateTokenRequest.Claims = authClaims;
-
-                var tokenResp = await _tokenService.GenerateTokenAsync(generateTokenRequest);
+                string jwtToken = await _tokenService.CreateToken(user);
                 TokenResult tokenResult = new TokenResult();
-                tokenResult.accessToken = new JwtSecurityTokenHandler().WriteToken(tokenResp.JwtSecurityToken);
+                tokenResult.accessToken = jwtToken;
                 var jsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(tokenResult);
 
-                return Content(jsonStr);
+                return new JsonResult(tokenResult);
             }
             else
                 return BadRequest(new ArgumentException("Invalid username or password"));

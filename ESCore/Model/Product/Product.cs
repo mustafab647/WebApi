@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -8,9 +9,14 @@ using System.Threading.Tasks;
 
 namespace ESCore.Model.Product
 {
-    [Table("Product")]
+    //[Table("Product")]
     public class Product : ESBase
     {
+        public Product() 
+        {
+            Variants = new HashSet<ProductVariant>();
+        }
+
         [Column("Code")]
         [DataType(DataType.Text)]
         [MaxLength(50)]
@@ -34,11 +40,11 @@ namespace ESCore.Model.Product
         [DataType("boolean")]
         public bool IsDeleted { get; set; }
         
-        public List<ProductImage>? Images { get; set; }
-        public virtual List<ProductVariant>? Variants { get; set; }
+        public virtual ICollection<ProductImage>? Images { get; set; }
+        public virtual ICollection<ProductVariant> Variants { get; set; }
         public virtual Currency? Currency { get; set; }
-        public virtual List<ProductSpecificationMap>? Specifications { get; set; }
-        public virtual List<CategoryProductMap>? Categories { get; set; }
+        public virtual ICollection<ProductSpecificationMap>? Specifications { get; set; }
+        public virtual ICollection<CategoryProductMap>? Categories { get; set; }
 
     }
 }

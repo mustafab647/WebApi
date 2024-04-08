@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 using WebApi.Models;
 
-namespace WebApi.Attribute
+namespace WebApi.Attributes
 {
     public class ErrorHandlingFilterAttribute : ExceptionFilterAttribute
     {

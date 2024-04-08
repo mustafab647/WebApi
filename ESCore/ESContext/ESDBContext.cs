@@ -1,16 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using ESCore.Model.Product;
 using ESCore.Model;
 using ESCore.Model.Authentication;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 //using System.Data.Entity;
 
 namespace ESCore.ESContext
@@ -32,7 +24,7 @@ namespace ESCore.ESContext
         public DbSet<User> Users { get; set; }
 
         //public ESDBContext(string connectionString) : base(connectionString) { }
-        public ESDBContext(DbContextOptions<ESDBContext> dbContextOptions) : base(dbContextOptions)
+        public ESDBContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
         }
         //public ESDBContext(DbContextOptions dbContextOptions,IConfiguration configration)
@@ -41,26 +33,32 @@ namespace ESCore.ESContext
         //    _connectionString = configration.GetConnectionString("MsSqlConnStr") ?? "";
         //}
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //optionsBuilder.UseSqlServer(x => x.MigrationsAssembly("WebApi"));
-            //optionsBuilder.UseSqlServer(_connectionString);
-            base.OnConfiguring(optionsBuilder);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    //optionsBuilder.UseSqlServer(x => x.MigrationsAssembly("WebApi"));
+        //    //optionsBuilder.UseSqlServer(_connectionString);
+        //    base.OnConfiguring(optionsBuilder);
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().ToTable(nameof(Category)).HasMany(x => x.ChildCategories);
-            modelBuilder.Entity<CategoryProductMap>().ToTable(nameof(CategoryProductMap));
-            modelBuilder.Entity<Currency>().ToTable(nameof(Currency));
-            modelBuilder.Entity<Product>().ToTable(nameof(Product)).HasMany(x => x.Categories);
-            modelBuilder.Entity<ProductSpecificationMap>().ToTable(nameof(ProductSpecificationMap));
-            modelBuilder.Entity<ProductVariant>().ToTable(nameof(ProductVariant));
-            modelBuilder.Entity<SpecificationType>().ToTable(nameof(SpecificationType));
-            modelBuilder.Entity<Specification>().ToTable(nameof(Specification));
-            modelBuilder.Entity<VariantType>().ToTable(nameof(VariantType));
-            modelBuilder.Entity<VariantTypeValue>().ToTable(nameof(VariantTypeValue));
-            modelBuilder.Entity<ProductImage>().ToTable(nameof(ProductImage));
-            modelBuilder.Entity<ProductVariantMap>().ToTable(nameof(ProductVariantMap));
+            modelBuilder.Entity<CategoryProductMap>().ToTable(nameof(CategoryProductMap));//.HasKey(x => x.Id);
+            modelBuilder.Entity<Currency>().ToTable(nameof(Currency));//.HasKey(x => x.Id);
+            modelBuilder.Entity<Product>().ToTable(nameof(Product));//.HasKey(x => x.Id);
+            
+            modelBuilder.Entity<ProductSpecificationMap>().ToTable(nameof(ProductSpecificationMap));//.HasKey(x => x.Id);
+            modelBuilder.Entity<ProductVariant>().ToTable(nameof(ProductVariant));//.HasKey(x => x.Id);
+            modelBuilder.Entity<SpecificationType>().ToTable(nameof(SpecificationType));//.HasKey(x=>x.Id);
+            modelBuilder.Entity<Specification>().ToTable(nameof(Specification));//.HasKey(x => x.Id);
+            modelBuilder.Entity<VariantType>().ToTable(nameof(VariantType));//.HasKey(x => x.Id);
+            modelBuilder.Entity<VariantTypeValue>().ToTable(nameof(VariantTypeValue));//.HasKey(x => x.Id);
+            modelBuilder.Entity<ProductImage>().ToTable(nameof(ProductImage));//.HasKey(x => x.Id);
+            modelBuilder.Entity<ProductVariantMap>().ToTable(nameof(ProductVariantMap));//.HasKey(x => x.Id);
+
+            modelBuilder.Entity<Product>().Navigation(x => x.Variants).UsePropertyAccessMode(PropertyAccessMode.Field).AutoInclude();
+            modelBuilder.Entity<ProductVariant>().Navigation(x => x.VariantMap).AutoInclude();
+            modelBuilder.Entity<Product>().HasMany(x=>x.Variants).WithOne(x=>x.Product).HasForeignKey(x=>x.ProductId).HasPrincipalKey(x=>x.Id).IsRequired();
+
             modelBuilder.Entity<User>().ToTable("ApiUser");
             base.OnModelCreating(modelBuilder);
         }

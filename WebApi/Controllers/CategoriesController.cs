@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using ESCore.Model.Product;
 using WebApi.Models;
-using WebApi.Attribute;
+using WebApi.Attributes;
 using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    [Authorize(Roles ="Category")]
+    [Authorize(Roles = "Category")]
     public class CategoriesController : ControllerBase
     {
         private readonly ESDBContext _context;
@@ -18,7 +18,6 @@ namespace WebApi.Controllers
             _context = context;
         }
         [HttpGet]
-        [Authorize(Roles = "Category.View")]
         public List<Category> GetCategory()
         {
             List<Category> categories = _context.Categories.ToList();

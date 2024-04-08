@@ -3,7 +3,7 @@ using ESCore.Model.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.Attribute;
+using WebApi.Attributes;
 using WebApi.Models;
 
 namespace WebApi.Controllers
@@ -35,6 +35,14 @@ namespace WebApi.Controllers
             return _context.SpecificationTypes.ToList();
         }
 
+        //[ErrorHandlingFilter]
+        //[HttpPost]
+        //public SpecificationType CreateSpecificationType(SpecificationType specificationType)
+        //{
+        //    _context.SpecificationTypes.Add(specificationType);
+        //    return specificationType;
+        //}
+
         [ErrorHandlingFilter]
         [HttpPost]
         [Route("CreateSpecificationType")]
@@ -56,10 +64,14 @@ namespace WebApi.Controllers
             if (_context.Specifications.Any(x => x.Value == value && x.SpecificationTypeId == specificationTypeId))
                 throw new ResultException("Already Specification");
 
+            var specificationType = _context.SpecificationTypes.FirstOrDefault(x => x.Id == specificationTypeId);
+            if (specificationType == null)
+                throw new ResultException("Not found SpecificationType");
             Specification specification = new Specification();
-            specification.Name = name;
+            specification.Name = specificationType?.Name ?? "";
             specification.Value = value;
             specification.SpecificationTypeId = specificationTypeId;
+            _context.Specifications.Add(specification);
             _context.SaveChanges();
             return specification;
         }
